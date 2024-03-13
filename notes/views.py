@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import Http404
 from .models import Notes
-from django.views.generic import ListView,DetailView,CreateView
-
+from django.views.generic import ListView,DetailView,CreateView,UpdateView
+from django.views.generic.edit import DeleteView
+from .forms import NotesForm
 
 # def list(request):
 #     all_notes = Notes.objects.all()
@@ -27,5 +28,15 @@ class NoteDetailView(DetailView):
 
 class NoteCreateView(CreateView):
     model = Notes
-    fields = ['title','content']
+    # fields = ['title','content']
+    form_class = NotesForm
     success_url ="/smart/notes"
+class NoteUpdateView(UpdateView):
+    model = Notes
+    # fields = ['title','content']
+    form_class = NotesForm
+    success_url ="/smart/notes"
+class NoteDeleteView(DeleteView):
+    model = Notes
+    success_url ="/smart/notes"
+    template_name= 'notes/notes_delete.html'

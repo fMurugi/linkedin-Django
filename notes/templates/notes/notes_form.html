@@ -2,9 +2,13 @@
 
 {% block content %}
     <h1 class="my-5">Create a new note</h1>
-    <form method="POST" action="{% url 'notes.create' %}">
+    <form method="POST" >
         {% csrf_token %}
         {{ form}}
         <button type="submit" class="btn btn-primary my-5">Submit</button>
     </form>
+{% if form.errors %}
+<div class="alert alert-danger my-5"></div>
+{{form.errors.title.as_text}}
+{% endif %}
 {% endblock %}
